@@ -32,7 +32,6 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>todo_app</title>
                     <link
                         href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap"
                         rel="stylesheet"
