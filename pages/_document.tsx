@@ -7,35 +7,32 @@ import Document, {
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
-        const sheet = new ServerStyleSheet();
-        const originalRenderPage = ctx.renderPage;
+        const sheet = new ServerStyleSheet()
+        const originalRenderPage = ctx.renderPage
+
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
-                    enhanceApp: (App) => (props) =>
+                    enhanceApp: (App: any) => (props: any) =>
                         sheet.collectStyles(<App {...props} />),
-                });
-            const initialProps = await Document.getInitialProps(ctx);
+                })
+
+            const initialProps = await Document.getInitialProps(ctx)
             return {
                 ...initialProps,
-                styles: (
-                    <>
-                        {initialProps.styles}
-                        {sheet.getStyleElement()}
-                    </>
-                ),
-            };
+                styles: [initialProps.styles, sheet.getStyleElement()],
+            }
         } finally {
-            sheet.seal();
+            sheet.seal()
         }
     }
-
     render() {
         return (
             <Html>
                 <Head>
+                    <title>todo_app</title>
                     <link
                         href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap"
                         rel="stylesheet"
@@ -53,5 +50,3 @@ class MyDocument extends Document {
         );
     }
 }
-
-export default MyDocument;
