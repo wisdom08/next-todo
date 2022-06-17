@@ -1,6 +1,7 @@
 import {AppProps} from "next/app";
 import GlobalStyle from "../styles/GlobalStyle";
 import Head from 'next/head'
+import Header from "../components/Header";
 
 const App = ({Component, pageProps}: AppProps) => {
     return (
@@ -9,6 +10,7 @@ const App = ({Component, pageProps}: AppProps) => {
                 <title>todo_app</title>
             </Head>
             <GlobalStyle/>
+            <Header/>
             <Component {...pageProps}/>
         </>
     )
