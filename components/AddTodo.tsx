@@ -93,7 +93,6 @@ const AddTodo: React.FC = () => {
                 return;
             }
             await addTodoAPI({ text, color: selectedColor });
-            console.log("추가했습니다.");
             router.push("/");
         } catch (e) {
             console.log(e);

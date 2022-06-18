@@ -178,7 +178,6 @@ const TodoList: React.FC<IProps> = ({todos}) => {
             })
             setLocalTodos(newTodos);
 
-            console.log('체크 완료!')
         } catch (e) {
             console.log("-> e", e);
         }
@@ -189,7 +188,6 @@ const TodoList: React.FC<IProps> = ({todos}) => {
             await deleteTodoAPI(id);
             const newtTodos = localTodos.filter((todo) => todo.id !== id);
             setLocalTodos(newtTodos);
-            console.log('삭제')
         } catch (e) {
             console.log("-> e", e);
         }
