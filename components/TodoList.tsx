@@ -4,7 +4,7 @@ import palette from "../styles/palette";
 import React, {useMemo, useState} from "react";
 import TrashCanIcon from "../public/statics/svg/trash_can.svg"
 import CheckMarkIcon from "../public/statics/svg/check_mark.svg"
-import {checkTodoAPI} from "../lib/api/todo";
+import {checkTodoAPI, deleteTodoAPI} from "../lib/api/todo";
 
 const Container = styled.div`
   width: 100%;
@@ -184,6 +184,17 @@ const TodoList: React.FC<IProps> = ({todos}) => {
         }
     };
 
+    const deleteTodo = async (id: number) => {
+        try {
+            await deleteTodoAPI(id);
+            const newtTodos = localTodos.filter((todo) => todo.id !== id);
+            setLocalTodos(newtTodos);
+            console.log('삭제')
+        } catch (e) {
+            console.log("-> e", e);
+        }
+    }
+
     return (
         <Container>
             <div className="todo-list-header">
@@ -204,7 +215,7 @@ const TodoList: React.FC<IProps> = ({todos}) => {
                     <li className="todo-item" key={todo.id}>
                         <div className="todo-left-side">
                             <div className={`todo-color-block bg-${todo.color}`}/>
-                            <p className={`todo-next ${todo.checked ? "checked-todo-text" : ""}`}>
+                            <p className={`todo-next ${todo.checked ? "checked-todos-text" : ""}`}>
                                 {todo.text}
                             </p>
                         </div>
@@ -223,7 +234,7 @@ const TodoList: React.FC<IProps> = ({todos}) => {
                                     <TrashCanIcon
                                         className="todo-trash-can"
                                         onClick={() => {
-
+                                            deleteTodo(todo.id);
                                         }}/>
                                     <CheckMarkIcon
                                         className="todo-check-mark"
