@@ -3,6 +3,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import Head from 'next/head'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import {wrapper} from "../store";
 
 const App = ({Component, pageProps}: AppProps) => {
     return (
@@ -18,4 +19,4 @@ const App = ({Component, pageProps}: AppProps) => {
     )
 };
 
-export default App;
+export default wrapper.withRedux(App);
